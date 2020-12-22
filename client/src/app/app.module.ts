@@ -11,13 +11,22 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SharedModule } from './shared/shared.module';
+import { ListsComponent } from './lists/lists.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    ListsComponent,
+    MemberDetailComponent,
+    MemberListComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +35,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    BsDropdownModule.forRoot()
+    SharedModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
