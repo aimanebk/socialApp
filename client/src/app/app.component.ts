@@ -1,5 +1,7 @@
+import { User } from './models/user';
+import { AccountService } from './services/account.service';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 
 import { catchError, first, tap } from 'rxjs/operators'
@@ -9,22 +11,18 @@ import { catchError, first, tap } from 'rxjs/operators'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'The Social app';
-  users$ : Observable<any>;
+  users: any;
 
-  constructor(private http : HttpClient){
-    this.getUsers();
+  constructor(private accountService: AccountService) {}
+
+  ngOnInit(){
+    this.setCurrentUser();
   }
 
-  getUsers(){
-    this.users$ = this.http.get('https://localhost:5001/api/users')
-    .pipe(
-      tap(console.log),
-      catchError(err => {
-        return throwError(err)
-      }),
-      first()
-    );
+  setCurrentUser() {
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    this.accountService.setCurrentUser(user);
   }
 }
