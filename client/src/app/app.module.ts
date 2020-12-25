@@ -24,6 +24,7 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
     ServerErrorComponent,
     TestErrorsComponent,
     MemberCardComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
