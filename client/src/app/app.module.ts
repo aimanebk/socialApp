@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { SharedModule } from './shared/shared.module';
@@ -25,6 +25,8 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { DateInputComponent } from './forms/date-input/date-input.component';
+import { TextInputComponent } from './forms/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
     TestErrorsComponent,
     MemberCardComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    DateInputComponent,
+    TextInputComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +54,7 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule 
   ],
   providers: [

@@ -8,6 +8,7 @@ using API.Entities;
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace API.Controllers
 {
@@ -15,8 +16,10 @@ namespace API.Controllers
     {
         private readonly DataContext context;
         private readonly ITokenService tokenService;
-        public AccountsController(DataContext context, ITokenService tokenService)
+        private readonly IMapper mapper;
+        public AccountsController(DataContext context, ITokenService tokenService, IMapper mapper)
         {
+            this.mapper = mapper;
             this.tokenService = tokenService;
             this.context = context;
         }
@@ -28,12 +31,11 @@ namespace API.Controllers
 
             using var hmac = new HMACSHA512();
 
-            var user = new AppUser
-            {
-                UserName = registerDto.Username.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
-            };
+            var user = mapper.Map<AppUser>(registerDto);
+
+            user.UserName = registerDto.Username.ToLower();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            user.PasswordSalt = hmac.Key;
 
             context.Users.Add(user);
 
@@ -43,6 +45,7 @@ namespace API.Controllers
             {
                 Username = user.UserName,
                 Token = tokenService.CreateToken(user),
+                KnownAs = user.KnownAs
             };
         }
 
@@ -68,7 +71,8 @@ namespace API.Controllers
             {
                 Username = user.UserName,
                 Token = tokenService.CreateToken(user),
-                photoUrl = user.Photos.SingleOrDefault(x => x.IsMain)?.Url
+                photoUrl = user.Photos.SingleOrDefault(x => x.IsMain)?.Url,
+                KnownAs = user.KnownAs
             };
         }
 
